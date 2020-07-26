@@ -18,13 +18,13 @@
             </div>
             <div class="col-md-6">
                 <div class="input-section half-width">
-                    <input id="pin-confirm-display" class="form-control display" type="text" maxlength="4">
+                    <input id="pin-confirm-display" class="form-control display" type="text" max="9999">
                     <div class="numbers">
                         <div class="calc-body">
                             <div class="calc-button-row">
-                              <div onclick="number(7)" class="button">7</div>
-                              <div onclick="number(8)" class="button">8</div>
-                              <div onclick="number(9)" class="button">9</div>
+                              <div onclick="number(7)" value="7" class="button">7</div>
+                              <div onclick="number(8)" value="8" class="button">8</div>
+                              <div onclick="number(9)" value="9" class="button">9</div>
                             </div>
                             <div class="calc-button-row">
                               <div onclick="number(4)" class="button">4</div>
@@ -95,7 +95,12 @@
             display = document.getElementById("pin-confirm-display").value = "";
         });
 
-    
+        document.getElementById("backspace").addEventListener('click', function(){
+            display = display.toString().slice(0, -1);
+            document.getElementById("pin-confirm-display").value = display;
+        });
+
+        
 
     </script>
 </body>
