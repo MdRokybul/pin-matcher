@@ -97,19 +97,29 @@
                     document.getElementById("pin-match").style.display = "block";
                     document.getElementById("generate-pin-display").value = "";
                     display = document.getElementById("input-pin-display").value = "";
+                    let currentRemain = turnRemain();
+                    var currentRemainResult = 3 - currentRemain;
+                    var finalRemain = currentRemain + currentRemainResult;
+                    document.getElementById("turn-remain").innerText = finalRemain;
                 }
                 else{
                     document.getElementById("message").style.display = "none";
                     document.getElementById("pin-not-match").style.display = "block";
-                    var turnRemain = 1;
-                    var final = document.getElementById("turn-remain").innerText;
-                    const result = final - turnRemain;
-                    document.getElementById("turn-remain").innerText = result;
-                    if (result == 0) {
+                    let currentRemain = turnRemain();
+                    document.getElementById("turn-remain").innerText = currentRemain;
+                    if (currentRemain == 0) {
                         document.getElementById("submit-btn").disabled = true;
                     }
                 }
             }
+        }
+
+
+        function turnRemain() {
+            let turnRemain = 1;
+            let setTurnRemain = document.getElementById("turn-remain").innerText;
+            let currentRemain = setTurnRemain - turnRemain;
+            return currentRemain;
         }
 
 
