@@ -37,7 +37,7 @@
                               <div onclick="number(3)" class="button">3</div>
                             </div>
                             <div class="calc-button-row">
-                                <div id="backspace" class="button"><</div>
+                                <div onclick="backspace()" class="button"><</div>
                                 <div onclick="number(0)" class="button">0</div>
                                 <div id="clear" class="button">C</div>
                             </div>
@@ -59,47 +59,50 @@
 
     <script>
 
-        
+        //Pin generator button
         document.getElementById("pin-generator").addEventListener('click', function(){
             let random = Math.floor(1000 + Math.random() * 9000);
             let round = Math.round(random);
             console.log(round)
             document.getElementById("generate-pin-display").value = round;
             document.getElementById("pin-not-match").style.display = "none";
+            document.getElementById("pin-match").style.display = "none";
         });
 
+        //Pin confirm display
         let display = document.getElementById("pin-confirm-display").value = "";
         function number(number) {
             display = display + number;
             document.getElementById("pin-confirm-display").value = display;
+            document.getElementById("pin-not-match").style.display = "none";
+            document.getElementById("pin-match").style.display = "none";
             //maximum lenght 4 digit .
         }
 
+
+        //Submit button
         document.getElementById("submit-btn").addEventListener('click', function(){
-            if (document.getElementById("generate-pin-display").value == '') {
-                document.getElementById("pin-not-match").innerText = "Please Generate Pin First";
-                document.getElementById("pin-not-match").style.display = "block";
+            if (document.getElementById("generate-pin-display").value == document.getElementById("pin-confirm-display").value) {
+            document.getElementById("pin-match").style.display = "block";
+            document.getElementById("generate-pin-display").value = "";
+            display = document.getElementById("pin-confirm-display").value = "";
+
             }
             else{
-                if (document.getElementById("generate-pin-display").value == document.getElementById("pin-confirm-display").value) {
-                document.getElementById("pin-match").style.display = "block";
-            }
-                else{
-                document.getElementById("pin-not-match").style.display = "block";
-                }
+            document.getElementById("pin-not-match").style.display = "block";
             }
         });
 
-
+        //Clear btn
         document.getElementById("clear").addEventListener('click', function(){
             display = document.getElementById("pin-confirm-display").value = "";
         });
 
-        document.getElementById("backspace").addEventListener('click', function(){
+        //Backspace
+        function backspace() {
             display = display.toString().slice(0, -1);
             document.getElementById("pin-confirm-display").value = display;
-        });
-
+        }
         
 
     </script>
